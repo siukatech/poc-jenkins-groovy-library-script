@@ -60,13 +60,15 @@ pipeline {
                     properties([
                         parameters([
                             string(
-                                defaultValue: 'poc-react-backend-parent', 
+                                // defaultValue: "poc-react-backend-parent", 
+                                defaultValue: "${config.repoName}", 
                                 name: 'PROJECT_NAME', 
                                 description: 'Project Name',
                                 trim: true
                             ),
                             string(
-                                defaultValue: 'https://github.com/siukatech/poc-react-backend-parent.git',
+                                // defaultValue: 'https://github.com/siukatech/poc-react-backend-parent.git',
+                                defaultValue: "${config.repoHttp}://${config.repoHostname}/${config.repoUsername}/${config.repoName}.git",
                                 name: 'PROJECT_URL', 
                                 description: 'Project Url',
                                 trim: true
@@ -282,6 +284,10 @@ pipeline {
                         )
                     ]) {
 
+                    env.pushUrl = "${config.repoHttp}://${username}:${password}@${config.repoHostname}/${username}/${GITHUB_PROJECT_NAME}.git"
+                    env.pushUrlWithoutPassword = "${config.repoHttp}://${username}:xxxxxx@${config.repoHostname}/${username}/${GITHUB_PROJECT_NAME}.git"
+                    echo "[${STAGE_NAME}] pushUrlWithoutPassword: ${pushUrlWithoutPassword}"
+
                         // https://stackoverflow.com/a/52492319
 //                     echo "USERNAME:PASSWORD@aaa" | awk -v srch="USERNAME" -v repl="$COMMAND_MODE" -v pw="${TERM}" '{sub(srch,repl,$0); sub(/PASSWORD/,pw,$0); print $0}'
 //                         remoteUrl = sh(
@@ -291,11 +297,13 @@ pipeline {
 //                             git config --global user.email "user.email is not required"
 //                             git push https://${username}:${password}@github.com/${username}/${GITHUB_PROJECT_NAME}.git --tags
 //                             git push origin ${tagName}
+
+                            // git push https://${username}:${password}@github.com/${username}/${GITHUB_PROJECT_NAME}.git --tags
                         sh('''
                             git config --global user.email "${GITHUB_CREDENTIALS_EMAIL}"
                             git config --global user.name "${username}"
                             git tag -a ${tagName} -m "Release version ${tagName}"
-                            git push https://${username}:${password}@github.com/${username}/${GITHUB_PROJECT_NAME}.git --tags
+                            git push ${pushUrl} --tags
                         ''')
 
                     }
