@@ -192,8 +192,19 @@ pipeline {
 //                 echo "[${STAGE_NAME}] versionInfo: ${versionInfo}"
 
                 // Run gradle on a Unix agent.
-                sh "./gradlew build"
-                // sh "./gradlew clean build"
+                // sh "./gradlew build"
+                // // sh "./gradlew clean build"
+                // Reference:
+                // https://stackoverflow.com/a/44231270
+                // https://www.baeldung.com/ops/jenkins-conditional-constructs
+                // https://www.baeldung.com/gradle-skip-tests
+                def skipTest = config.skipTest
+                if (skipTest ) {
+                    sh "./gradlew build -x test"
+                }
+                else {
+                    sh "./gradlew build"
+                }
 
 //                 sh "ls -la build/**/*.jar"
 
@@ -268,6 +279,11 @@ pipeline {
         }
 
         stage('tag') {
+            // Reference:
+            // https://stackoverflow.com/a/44231270
+            when {
+                branch 'main'
+            }
             steps {
                 script {
                     echo "[${STAGE_NAME}] GITHUB_PROJECT_NAME: ${GITHUB_PROJECT_NAME}"
