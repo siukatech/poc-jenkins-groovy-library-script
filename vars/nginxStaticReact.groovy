@@ -59,26 +59,26 @@ pipeline {
             }
         }
 
-        stage('set-up') {
-            steps {
-                sh "npm install --save-dev"
-                sh "npm install"
-            }
-        }
+        // stage('set-up') {
+        //     steps {
+        //         sh "npm install --save-dev"
+        //         sh "npm install"
+        //     }
+        // }
 
-        stage('build') {
-            steps {
-                def skipTest = config.skipTest
-                if (skipTest ) {
-                    sh "npm run build"
-                }
-                else {
-                    sh "npm run build"
-                }
+        // stage('build') {
+        //     steps {
+        //         def skipTest = config.skipTest
+        //         // if ( skipTest ) {
+        //         //     sh "npm run build"
+        //         // }
+        //         // else {
+        //         //     sh "npm run build"
+        //         // }
 
-                sh "ls -la build/*"
-            }
-        }
+        //         // sh "ls -la build/*"
+        //     }
+        // }
     }
   
     // https://www.jenkins.io/doc/pipeline/tour/post/
