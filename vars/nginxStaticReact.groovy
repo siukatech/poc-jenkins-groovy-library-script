@@ -12,6 +12,10 @@ pipeline {
     }
 //     agent any
 
+    tools {
+        'org.jenkinsci.plugins.docker.commons.tools.DockerTool' '18.09'
+    }
+
     options {
         // Timeout counter starts AFTER agent is allocated
         // timeout(time: 1, unit: 'SECONDS')
@@ -28,6 +32,7 @@ pipeline {
                 '''
 
                 sh "npm --version"
+                sh "docker version" // DOCKER_CERT_PATH is automatically picked up by the Docker client
             }
         }
         stage('parameter') {
