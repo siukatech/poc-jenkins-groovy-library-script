@@ -5,12 +5,12 @@ def call(Map config = [:]) {
 
 /* Requires the Docker Pipeline plugin */
 pipeline {
-     agent {
-        docker {
-            image 'node:20.12.2-slim'
-        }
-    }
-//     agent any
+    //  agent {
+    //     docker {
+    //         image 'node:20.12.2-slim'
+    //     }
+    // }
+    agent any
 
     // tools {
     //     'org.jenkinsci.plugins.docker.commons.tools.DockerTool' '18.09'
@@ -31,6 +31,7 @@ pipeline {
                     printenv
                 '''
 
+                sh "node --version"
                 sh "npm --version"
                 // sh "docker version" // DOCKER_CERT_PATH is automatically picked up by the Docker client
             }
