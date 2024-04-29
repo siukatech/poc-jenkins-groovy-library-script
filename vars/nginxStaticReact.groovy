@@ -68,15 +68,17 @@ pipeline {
 
         stage('build') {
             steps {
-                def skipTest = config.skipTest
-        //         // if ( skipTest ) {
-        //         //     sh "npm run build"
-        //         // }
-        //         // else {
-        //         //     sh "npm run build"
-        //         // }
+                script {
+                    def skipTest = config.skipTest
+                    if ( skipTest ) {
+                        sh "npm run build"
+                    }
+                    else {
+                        sh "npm run build"
+                    }
 
-        //         // sh "ls -la build/*"
+                    sh "ls -la build/*"
+                }
             }
         }
     }
