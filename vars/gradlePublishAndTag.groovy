@@ -199,7 +199,7 @@ pipeline {
                 // https://www.baeldung.com/ops/jenkins-conditional-constructs
                 // https://www.baeldung.com/gradle-skip-tests
                 def skipTest = config.skipTest
-                if (skipTest ) {
+                if ( skipTest ) {
                     sh "./gradlew build -x test"
                 }
                 else {
