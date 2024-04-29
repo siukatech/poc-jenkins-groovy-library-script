@@ -186,31 +186,34 @@ pipeline {
 
         stage('build') {
             steps {
-//                 echo "[${STAGE_NAME}] currentStage: ${STAGE_NAME}"
-//                 echo "[${STAGE_NAME}] groupId: ${groupId}"
-//                 echo "[${STAGE_NAME}] artifactId: ${artifactId}"
-//                 echo "[${STAGE_NAME}] versionInfo: ${versionInfo}"
+                script {
+                    // echo "[${STAGE_NAME}] currentStage: ${STAGE_NAME}"
+                    // echo "[${STAGE_NAME}] groupId: ${groupId}"
+                    // echo "[${STAGE_NAME}] artifactId: ${artifactId}"
+                    // echo "[${STAGE_NAME}] versionInfo: ${versionInfo}"
 
-                // Run gradle on a Unix agent.
-                // sh "./gradlew build"
-                // // sh "./gradlew clean build"
-                // Reference:
-                // https://stackoverflow.com/a/44231270
-                // https://www.baeldung.com/ops/jenkins-conditional-constructs
-                // https://www.baeldung.com/gradle-skip-tests
-                def skipTest = config.skipTest
-                if ( skipTest ) {
-                    sh "./gradlew build -x test"
+                    // Run gradle on a Unix agent.
+                    // sh "./gradlew build"
+                    // // sh "./gradlew clean build"
+                    // Reference:
+                    // https://stackoverflow.com/a/44231270
+                    // https://www.baeldung.com/ops/jenkins-conditional-constructs
+                    // https://www.baeldung.com/gradle-skip-tests
+                    def skipTest = config.skipTest
+                    if ( skipTest ) {
+                        sh "./gradlew build -x test"
+                    }
+                    else {
+                        sh "./gradlew build"
+                    }
+
+                    // sh "ls -la build/**/*.jar"
+
+                    sh "cp \$(ls build/**/*.jar) build/"
+
+                    sh "ls -la build/*.jar"
+                    
                 }
-                else {
-                    sh "./gradlew build"
-                }
-
-//                 sh "ls -la build/**/*.jar"
-
-                sh "cp \$(ls build/**/*.jar) build/"
-
-                sh "ls -la build/*.jar"
             }
 
 //             post {
