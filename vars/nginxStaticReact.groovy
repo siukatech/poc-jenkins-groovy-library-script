@@ -59,12 +59,12 @@ pipeline {
             }
         }
 
-        // stage('set-up') {
-        //     steps {
-        //         sh "npm install --save-dev"
-        //         sh "npm install"
-        //     }
-        // }
+        stage('set-up') {
+            steps {
+                sh "npm install --save-dev"
+                sh "npm install"
+            }
+        }
 
         // stage('build') {
         //     steps {
