@@ -66,9 +66,9 @@ pipeline {
             }
         }
 
-        // stage('build') {
-        //     steps {
-        //         def skipTest = config.skipTest
+        stage('build') {
+            steps {
+                def skipTest = config.skipTest
         //         // if ( skipTest ) {
         //         //     sh "npm run build"
         //         // }
@@ -77,8 +77,8 @@ pipeline {
         //         // }
 
         //         // sh "ls -la build/*"
-        //     }
-        // }
+            }
+        }
     }
   
     // https://www.jenkins.io/doc/pipeline/tour/post/
