@@ -66,7 +66,7 @@ pipeline {
             }
         }
 
-        stage('build') {
+        stage('build-project') {
             steps {
                 script {
                     def skipTest = config.skipTest
@@ -81,6 +81,15 @@ pipeline {
                 }
             }
         }
+
+        stage('build-image') {
+            steps {
+                script {
+                    def projImage = docker.build("nginx-react:${env.BUILD_ID}")
+                }
+            }
+        }
+
     }
   
     // https://www.jenkins.io/doc/pipeline/tour/post/
