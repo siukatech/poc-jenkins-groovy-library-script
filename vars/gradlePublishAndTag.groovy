@@ -41,12 +41,12 @@ pipeline {
 // //         NEXUS_HOSTNAME = 'nexus3:8081'
 //
 // //         GITHUB_CREDENTIALS_ID = 'github-siukatech'
-//         GITHUB_PROJECT_NAME = 'poc-react-backend-parent'
-//         GITHUB_PROJECT_URL = "https://github.com/siukatech/poc-react-backend-parent.git"
+//         GITHUB_PROJECT_NAME = 'poc-react-backend-core'
+//         GITHUB_PROJECT_URL = "https://github.com/siukatech/poc-react-backend-core.git"
 // //         GITHUB_PROJECT_URL = "${GIT_URL}"
 //
 // //         GIT_USERNAME = 'siukatech'
-// //         GIT_REPO_NAME = 'poc-react-backend-parent'
+// //         GIT_REPO_NAME = 'poc-react-backend-core'
 //
 //     }
 
@@ -60,14 +60,14 @@ pipeline {
                     properties([
                         parameters([
                             string(
-                                // defaultValue: "poc-react-backend-parent", 
+                                // defaultValue: "poc-react-backend-core", 
                                 defaultValue: "${config.repoName}", 
                                 name: 'PROJECT_NAME', 
                                 description: 'Project Name',
                                 trim: true
                             ),
                             string(
-                                // defaultValue: 'https://github.com/siukatech/poc-react-backend-parent.git',
+                                // defaultValue: 'https://github.com/siukatech/poc-react-backend-core.git',
                                 defaultValue: "${config.repoHttp}://${config.repoHostname}/${config.repoUsername}/${config.repoName}.git",
                                 name: 'PROJECT_URL', 
                                 description: 'Project Url',
@@ -89,10 +89,10 @@ pipeline {
                 //     def userInput = input(
                 //         id: 'userInput', message: 'Github Project Name and Url',
                 //         parameters: [
-                //                 string(defaultValue: 'poc-react-backend-parent',
+                //                 string(defaultValue: 'poc-react-backend-core',
                 //                         description: 'Project Name',
                 //                         name: 'ProjectName'),
-                //                 string(defaultValue: 'https://github.com/siukatech/poc-react-backend-parent.git',
+                //                 string(defaultValue: 'https://github.com/siukatech/poc-react-backend-core.git',
                 //                         description: 'Project Url',
                 //                         name: 'ProjectUrl'),
                 //         ])
