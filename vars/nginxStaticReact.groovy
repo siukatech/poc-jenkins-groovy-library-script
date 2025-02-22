@@ -68,7 +68,8 @@ pipeline {
         stage('set-up') {
             steps {
                 sh "npm install --save-dev"
-                sh "npm install"
+                // sh "npm install"
+                sh "npm ci"
             }
         }
 
